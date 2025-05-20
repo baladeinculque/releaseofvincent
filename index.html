@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Temps restant avant la libération de Vincent</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    #countdown {
+      font-size: 1.5em;
+      background: #1e1e1e;
+      padding: 20px 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Temps restant avant la libération de Vincent</h1>
+  <div id="countdown">Chargement...</div>
+
+  <script>
+    // Date cible : 31 mars 2026 à 18h30
+    const targetDate = new Date("2026-03-31T18:30:00");
+
+    function updateCountdown() {
+      const now = new Date();
+      const timeDiff = targetDate - now;
+
+      if (timeDiff <= 0) {
+        document.getElementById("countdown").innerHTML = "C'est l'heure ! 🎉";
+        clearInterval(interval);
+        return;
+      }
+
+      const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeDiff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((timeDiff / (1000 * 60)) % 60);
+      const seconds = Math.floor((timeDiff / 1000) % 60);
+
+      document.getElementById("countdown").innerHTML = 
+        `${days}j ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    // Mise à jour toutes les secondes
+    updateCountdown(); // appel initial
+    const interval = setInterval(updateCountdown, 1000);
+  </script>
+
+</body>
+</html>
